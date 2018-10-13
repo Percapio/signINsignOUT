@@ -41,7 +41,7 @@ def start_app():
                 element = window.FindElement('input_box')
                 element.Update('')
 
-def fetch_user(person_number):
+def fetch_user(phone_number):
     database = os.listdir('./database')
 
     for grab_file in database:
@@ -49,8 +49,8 @@ def fetch_user(person_number):
         data = open(location)
         json_data = json.load(data)
 
-        if int(person_number) == int(json_data['phone'][-4:]):
-            json_data = person_info(json_data)
+        if int(phone_number) == int(json_data['phone'][-4:]):
+            json_data = user_info(json_data)
 
             with open(('./{}'.format(location)), 'w') as outfile:
                 json.dump(json_data, outfile)
@@ -60,7 +60,7 @@ def fetch_user(person_number):
 
     return True
 
-def person_info(json_data):
+def user_info(json_data):
     layout = [
         [sg.Text(time.asctime(time.localtime(time.time())), font=("Helvetica", 18), justification='center', size=(25,1))],
         [sg.Text('Name: ', size=(10,1), font=("Helvetica", 18)), sg.Text(json_data['name'], font=("Helvetica", 18))],

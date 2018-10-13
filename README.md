@@ -1,49 +1,44 @@
-# signINsignOUT
+**signINsignOUT**
+
 A simple step-by-step guide to building a Log In/Out application using Python 2.7.
-___
-<br />
-
-## Table of Contents
-- Introduction
-    - Summary
-    - Setup
-- Start App
-    - Initial Setup 1
-    - Create the Window
-- User Data
-    - Prepping the Data
-- Fetch User
-    - Initial Setup 2
-    - Check for User
-- Person Info
-    - Initial Setup 3
-    - Display Information
-    - Test the Program 1
-- Complete the Program
-    - Proper Input Sanitizing
-    - Test the Program 2
-    - Complete Start App
-    - Complete Fetch Person
-    - Complete Person Info
-- Technology and Packages
-    - Technology
-    - Package Downloaded
-    - Default Python 2.7 Packages Used
-- Resources
 
 <br />
 
-______
+**Table of Contents**
+- [Introduction](#introduction)
+    - [Summary](#summary)
+    - [Setup](#setup)
+- [Start App](#start-app)
+    - [Initial Setup 1](#initial-setup-1)
+    - [Create the Window](#create-the-window)
+- [User Data](#user-data)
+    - [Prepping the Data](#prepping-the-data)
+- [Fetch User](#fetch-user)
+    - [Initial Setup 2](#initial-setup-2)
+    - [Check for User](#check-for-user)
+- [User Info](#user-info)
+    - [Initial Setup 3](#initial-setup-3)
+    - [Display Information](#display-information)
+    - [Test the Program 1](#test-the-program-1)
+- [Complete the Program](#complete-the-program)
+    - [Proper Input Sanitizing](#proper-input-sanitizing)
+    - [Test the Program 2](#test-the-program-2)
+    - [Complete Start App](#complete-start-app)
+    - [Complete Fetch User](#complete-fetch-user)
+    - [Complete User Info](#complete-user-info)
+- [Technology Used](#technology-used)
+- [Resources](#resources)
+
 <br />
 
 ## Introduction
-#### Summary
+### Summary
 
 &nbsp;&nbsp;&nbsp;&nbsp; This guide is designed to be instructions on how to build a small log in and out program.  The program will ask users for an input, and will check if the input is four digits.  If it is, then it will compare the input value to people currently saved in the database.  If this particular check is true, then it will display another screen to ask the users if they wish to log in or out.  If any of the previous checks are not true then the users will receive the proper errors to inform them of what went wrong during the process.
 
 &nbsp;&nbsp;&nbsp;&nbsp; You are expected to have a basic understanding of Terminal Bash and programming.  It would help if you knew Python, but it is not required.  Additionally, this guide will be assuming the program is written in a MacOSX environment, but the steps in the Startup section can be easily replaced with whichever OS you are most comfortable with.
 
-#### Startup
+### Setup
 
 To begin, let's make sure Python 2.7 is on your computer.
 ```
@@ -63,9 +58,9 @@ $ pip install pysimplegui
 <br />
 
 ## Start App
-#### Initial Setup 1
+### Initial Setup 1
 
-After creating a file (such as [example.py](./example.py)), you import the PySimpleGUI27 package.
+After creating a file (such as [example.py](./example.py)), import the PySimpleGUI27 package.
 ```
 import PySimpleGUI27 as sg
 ```
@@ -86,7 +81,7 @@ def start_app():
     ]
 ```
 
-#### Create the Window
+### Create the Window
 
 Set the window variable to start PySimpleGUI27 and be sure to include all of your layout configurations.
 ```
@@ -113,7 +108,7 @@ In the next part, you are going to create some fake data to test your program.  
 <br />
 
 ## User Data
-#### Prepping the Data
+### Prepping the Data
 
 You need some data to test your application.  If you don't want to build it yourself, there is always [JSON-generator](https://www.json-generator.com/).
 ```
@@ -135,7 +130,7 @@ The next few sections will cover the creation of a few new functions as well as 
 <br />
 
 ## Fetch User
-#### Initial Setup 2
+### Initial Setup 2
 
 Before starting your Fetch User function, import the necessary packages.
 ```
@@ -149,7 +144,7 @@ def fetch_user(phone_number):
     database = os.listdir('./database')
 ```
 
-#### Check for User
+### Check for User
 
 Create a *for* loop to step through the database.
 ```
@@ -159,10 +154,10 @@ for grab_file in database:
     json_data = json.load(data)
 ```
 
-Within the *for* loop, check if the current JSON file is going to contain the phone number you are looking for.  If it does then run a function called *person_info* (you are going to write this function this later).
+Within the *for* loop, check if the current JSON file is going to contain the phone number you are looking for.  If it does then run a function called *user_info* (you are going to write this function this later).
 ```
-if int(person_number) == int(json_data['phone'][-4:]):
-    person_info(json_data)
+if int(phone_number) == int(json_data['phone'][-4:]):
+    user_info(json_data)
     break
 ```
 
@@ -170,8 +165,8 @@ Before you move onto the next function, don't forget that it is best practice to
 
 <br />
 
-## Person Info Function
-#### Initial Setup 3
+## User Info
+### Initial Setup 3
 
 The purpose of this function is to check if a user exists in a database, and if he is then to open a second display window with all the necessary information.
 
@@ -179,7 +174,7 @@ In the modal (secondary display window), you want some time to be displayed, so 
 ```
 import time
 
-def person_info(json_data):
+def user_info(json_data):
 ```
 
 Much like the *start_app* function you made earier, create a layout with all the necessary data and initialize the window variable.
@@ -195,7 +190,7 @@ layout = [
 window = sg.Window('User Information').Layout(layout)
 ```
 
-#### Display Information
+### Display Information
 
 Create a *while* loop with all the conditional statements necessary to *break* out of the loop.  For testing cases, make every possible condition close the window.
 ```
@@ -210,7 +205,7 @@ while True:
         break
 ```
 
-#### Test the Program 1
+### Test the Program 1
 
 To test the program, update your *start_app* function to add an additonal button check and run the *fetch_user* function.
 ```
@@ -226,8 +221,8 @@ Awesome!  Looks like everythig works!  Almost done. Onwards!
 
 <br />
 
-## Complete Start App
-#### Proper Input Sanitizing
+## Complete the Program
+### Proper Input Sanitizing
 
 While you are in the *start_app* function, add a few steps to implement some basic sanitization on the input.  You don't want someone to accidently inject a script into your program and cause some unintended effects.
 
@@ -262,7 +257,7 @@ else:
     element.Update('')
 ```
 
-#### Test the Program 2
+### Test the Program 2
 
 Time for some more integration testing.  Run and test the program.
 ![alt text](./images/screen4.png 'Test of Too Little Input Numbers')
@@ -270,7 +265,7 @@ Time for some more integration testing.  Run and test the program.
 
 Looks great!
 
-#### Complete Start App Function
+### Complete Start App
 
 While you are here, finish the *start_app* function by adding a *Clear* button check to clear the input screen, and *enter* key check on the *Submit* conditional statement.
 ```
@@ -282,11 +277,11 @@ elif button == 'Submit' or ord(str(button)) == 13:
 
 To reduce the chances of errors, you want to check for the *Clear* button first before the *Submit* button.
 
-#### Complete Fetch Person Function
+### Complete Fetch User
 
 Update this function to change the user's new log in/out data and time stamps.
 ```
-json_data = person_info(json_data)
+json_data = user_info(json_data)
 
 with open(('./{}'.format(location)), 'w') as outfile:
     json.dump(json_data, outfile)
@@ -295,7 +290,7 @@ return False
 
 The *return False* statement is used to determine whether or not there to inform the user the phone number provided is not in the database.  Make sure to add a corresponding *True* statement outside of the *for* loop.
 
-#### Complete Person Info Function
+### Complete User Info
 
 Add a check for whether or not the user is logged in and display the correct 'Log In' or 'Log Out' button.
 ```
@@ -322,9 +317,6 @@ Program complete!  Well done!
 
 <br />
 
-______
-<br />
-
 ## Technology Used
 - Technology
     - [Python 2.7](https://docs.python.org/2/)
@@ -334,7 +326,7 @@ ______
     - [JSON](https://docs.python.org/2/library/json.html)
     - [OS](https://docs.python.org/2/library/os.html)
     - [Time](https://docs.python.org/2/library/os.html)
-______
+
 <br />
 
 ## Resources

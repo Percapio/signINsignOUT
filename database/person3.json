@@ -1,0 +1,32 @@
+{
+    "_id": "5bb6433b8d10f4c8a5e82436",
+    "index": 0,
+    "guid": "03a88d4b-98f4-46f7-be81-44afe010699e",
+    "isActive": false,
+    "age": 34,
+    "eyeColor": "brown",
+    "name": "Reilly Walsh",
+    "gender": "male",
+    "email": "reillywalsh@coash.com",
+    "phone": "+1 (872) 402-3411",
+    "address": "187 Gerritsen Avenue, Harborton, Northern Mariana Islands, 9179",
+    "about": "Consequat officia non sunt amet. Culpa cillum aliquip ex adipisicing voluptate sunt eiusmod. Excepteur dolore ipsum non dolore minim pariatur aliquip nisi quis qui magna occaecat labore.\r\n",
+    "registered": "2017-03-02T12:51:52 +08:00",
+    "tags": [
+      "exercitation",
+      "reprehenderit",
+      "reprehenderit",
+      "proident",
+      "irure",
+      "non",
+      "amet"
+    ],
+    "signedIN": true,
+    "timeLogs": [
+      "2016-03-14T04:38:11 +07:00",
+      "2016-03-27T03:51:26 +07:00",
+      "2015-08-16T04:05:40 +07:00",
+      "2015-09-16T02:48:29 +07:00",
+      "2015-02-07T01:22:04 +08:00"
+    ]
+}

@@ -8,19 +8,19 @@ A simple step-by-step guide to building a Log In/Out application using Python 2.
 - [Introduction](#introduction)
     - [Summary](#summary)
     - [Setup](#setup)
-- [Start App](#start-app)
-    - [Initial Setup 1](#initial-setup-1)
+- [Section 1: Start App](#section-1-start-app)
+    - [Setup Start App](#setup-start-app)
     - [Create the Window](#create-the-window)
-- [User Data](#user-data)
+- [Section 2: User Data](#section-2-user-data)
     - [Prepping the Data](#prepping-the-data)
-- [Fetch User](#fetch-user)
-    - [Initial Setup 2](#initial-setup-2)
+- [Section 3: Fetch User](#section-3-fetch-user)
+    - [Setup Fetch User](#setup-fetch-user)
     - [Check for User](#check-for-user)
-- [User Info](#user-info)
-    - [Initial Setup 3](#initial-setup-3)
+- [Section 4: User Info](#section-4-user-info)
+    - [Setup User Info](#setup-user-info)
     - [Display Information](#display-information)
     - [Test the Program 1](#test-the-program-1)
-- [Complete the Program](#complete-the-program)
+- [Section 5: Complete the Program](#section-5-complete-the-program)
     - [Proper Input Sanitizing](#proper-input-sanitizing)
     - [Test the Program 2](#test-the-program-2)
     - [Complete Start App](#complete-start-app)
@@ -34,9 +34,9 @@ A simple step-by-step guide to building a Log In/Out application using Python 2.
 ## Introduction
 ### Summary
 
-&nbsp;&nbsp;&nbsp;&nbsp; This guide is designed to be instructions on how to build a small log in and out program.  The program will ask users for an input, and will check if the input is four digits.  If it is, then it will compare the input value to people currently saved in the database.  If this particular check is true, then it will display another screen to ask the users if they wish to log in or out.  If any of the previous checks are not true then the users will receive the proper errors to inform them of what went wrong during the process.
+&nbsp;&nbsp;&nbsp;&nbsp; This guide is designed to be instructions on how to build a small log in and log out program.  The program will ask users for an input, and will check if the input is four digits long.  If it is, then it will compare the input value to people currently saved in the database.  If this particular check is true, then it will display on another screen information on the user and ask whether or not they wish to log in or out.  If any of the previous checks are not true then the users will receive the proper errors to inform them of what went wrong during the process.
 
-&nbsp;&nbsp;&nbsp;&nbsp; You are expected to have a basic understanding of Terminal Bash and programming.  It would help if you knew Python, but it is not required.  Additionally, this guide will be assuming the program is written in a MacOSX environment, but the steps in the Startup section can be easily replaced with whichever OS you are most comfortable with.
+&nbsp;&nbsp;&nbsp;&nbsp; You are expected to have a basic understanding of [Terminal](https://www.codecademy.com/courses/learn-the-command-line/lessons/navigation/exercises/your-first-command) and [programming](https://www.freecodecamp.org/).  It would help if you knew Python, but it is not required.  Additionally, this guide will be assuming the program is written in a MacOSX environment, but the steps in Setup can be easily replaced with whichever OS you are most comfortable with.
 
 ### Setup
 
@@ -50,24 +50,19 @@ If it's not present, or the version is incorrect, please refer to the proper doc
 
 - [MacOSX](https://www.python.org/downloads/)
 
-Next, you will be using Python package called PySimpleGUI27 for your project, so you will need to install it.
+Next, you will be using a Python package named PySimpleGUI27 for your project, so you will need to install it.
 ```
 $ pip install pysimplegui
 ```
 
 <br />
 
-## Start App
-### Initial Setup 1
+## Section 1: Start App
+### Setup Start App
 
 After creating a file (such as [example.py](./example.py)), import the PySimpleGUI27 package.
 ```
 import PySimpleGUI27 as sg
-```
-
-Create the function to the first part of your program.
-```
-def start_app():
 ```
 
 Then setup what you want your application to display.  In this case, it is going to be some text, an input box, and a few buttons.
@@ -90,7 +85,7 @@ window = sg.Window('Log In/Out', auto_size_buttons=False, return_keyboard_events
 
 As a heads up, the *return_keyboard_events* parameter allows keyboard inputs to be saved for future use.
 
-In the next part, you want to make sure the application stays open, so write a *while* loop with a *break* command to allow users a way to exit the program.
+In the next part, you want to make sure the application stays open, so write a conditional statement to do so with the proper exit option.
 ```
 while True:
     button, values = window.Read()
@@ -99,15 +94,15 @@ while True:
         break
 ```
 
-Test the function and see the beginnings of your hard work.  Don't forget to make sure to call the function at the end of your python file.
+Test the function and see the beginnings of your hard work.  
 
 ![alt text](./images/screen1.png 'Input box and buttons')
 
-In the next part, you are going to create some fake data to test your program.  Onwards!
+In the next section, you are going to create some fake data to test your program.  Onwards!
 
 <br />
 
-## User Data
+## Section 2: User Data
 ### Prepping the Data
 
 You need some data to test your application.  If you don't want to build it yourself, there is always [JSON-generator](https://www.json-generator.com/).
@@ -120,17 +115,14 @@ You need some data to test your application.  If you don't want to build it your
 }
 ```
 
-Create a folder called *database* in your project folder to keep your files organized and easily retrievable.
-```
-$ mkdir database
-```
+Create a folder called *database* in your project folder to keep your files organized and easily retrievable, and save your data files in the folder.
 
 The next few sections will cover the creation of a few new functions as well as returning to the previously made function for updating.
 
 <br />
 
-## Fetch User
-### Initial Setup 2
+## Section 3: Fetch User
+### Setup Fetch User
 
 Before starting your Fetch User function, import the necessary packages.
 ```
@@ -165,34 +157,30 @@ Before you move onto the next function, don't forget that it is best practice to
 
 <br />
 
-## User Info
-### Initial Setup 3
+## Section 4: User Info
+### Setup User Info
 
-The purpose of this function is to check if a user exists in a database, and if he is then to open a second display window with all the necessary information.
+The purpose of this function is to check if a user exists in a database, and open a second display window with all the necessary information.
 
-In the modal (secondary display window), you want some time to be displayed, so *import time* and write your function header.
+In the modal (secondary display window), you want some time to be displayed, so *import time*, and setup your function like how you had setup your *start_app* function.
 ```
 import time
 
 def user_info(json_data):
-```
+    layout = [
+        [sg.Text(time.asctime(time.localtime(time.time())), font=("Helvetica", 18), justification='center', size=(25,1))],
+        [sg.Text('Name: ', size=(10,1), font=("Helvetica", 18)), sg.Text(json_data['name'], font=("Helvetica", 18))],
+        [sg.Text('Number: ', size=(10,1), font=("Helvetica", 18)), sg.Text(json_data['phone'], font=("Helvetica", 18))],
+        [sg.Text('Is logged in? ', size=(10,1), font=("Helvetica", 18)), sg.Text(str(json_data['signedIN']), font=("Helvetica", 18))],
+        [sg.Button('Log In', key='logger'), sg.Button('Cancel')]
+    ]
 
-Much like the *start_app* function you made earier, create a layout with all the necessary data and initialize the window variable.
-```
-layout = [
-    [sg.Text(time.asctime(time.localtime(time.time())), font=("Helvetica", 18), justification='center', size=(25,1))],
-    [sg.Text('Name: ', size=(10,1), font=("Helvetica", 18)), sg.Text(json_data['name'], font=("Helvetica", 18))],
-    [sg.Text('Number: ', size=(10,1), font=("Helvetica", 18)), sg.Text(json_data['phone'], font=("Helvetica", 18))],
-    [sg.Text('Is logged in? ', size=(10,1), font=("Helvetica", 18)), sg.Text(str(json_data['signedIN']), font=("Helvetica", 18))],
-    [sg.Button('Log In', key='logger'), sg.Button('Cancel')]
-]
-
-window = sg.Window('User Information').Layout(layout)
+    window = sg.Window('User Information').Layout(layout)
 ```
 
 ### Display Information
 
-Create a *while* loop with all the conditional statements necessary to *break* out of the loop.  For testing cases, make every possible condition close the window.
+Create the necessary conditional statements to display the secondary window and close it.  For testing cases, make every possible condition close the window.
 ```
 while True:
     button, values = window.ReadNonBlocking()
@@ -210,23 +198,23 @@ while True:
 To test the program, update your *start_app* function to add an additonal button check and run the *fetch_user* function.
 ```
 elif button == 'Submit':
-fetch_user(phone_number)
+    fetch_user(phone_number)
 ```
 
 Now, time to test the program.
 
 ![alt text](./images/screen2.png 'A Wild Modal has Appeared')
 
-Awesome!  Looks like everythig works!  Almost done. Onwards!
+Awesome!  Looks like everything works!  Almost done. Onwards!
 
 <br />
 
-## Complete the Program
+## Section 5: Complete the Program
 ### Proper Input Sanitizing
 
-While you are in the *start_app* function, add a few steps to implement some basic sanitization on the input.  You don't want someone to accidently inject a script into your program and cause some unintended effects.
+While you are currently in the *start_app* function, you will want to enhance your program by adding some basic input sanitization.  You don't want someone to accidently inject a script into your program and cause some unintended effects.
 
-First, add *try and except* statements inside the *Submit* check. Then write the clauses to check if the input is number values and to notify the users when the input is not.
+The most straightforward way to do so is to use error checking statements like *try and except*.
 ```
 elif button == 'Submit':
     phone_number = values['input_box']
@@ -242,7 +230,7 @@ elif button == 'Submit':
 
 The lines with the variable *element* in it are for clearing the input box of all written text.
 
-Within the *try* clause, add an additional conditional statement to check if the number value is within the range you are checking for.
+Within the *try* clause, add additional conditional statements to check if the number value is within the range you are checking for.
 ```
 if int(phone_number) > 9999:
     sg.Popup('Enter last four of your phone number.')
@@ -267,7 +255,7 @@ Looks great!
 
 ### Complete Start App
 
-While you are here, finish the *start_app* function by adding a *Clear* button check to clear the input screen, and *enter* key check on the *Submit* conditional statement.
+While you are here, finish the *start_app* function by adding additional features such as *Clear* and *enter* key checks.
 ```
 elif button == 'Clear':
     element = window.FindElement('input_box')
@@ -281,18 +269,28 @@ To reduce the chances of errors, you want to check for the *Clear* button first 
 
 Update this function to change the user's new log in/out data and time stamps.
 ```
-json_data = user_info(json_data)
+for grab_file in database:
+    location = '{}{}'.format('database/', grab_file)
+    data = open(location)
+    json_data = json.load(data)
 
-with open(('./{}'.format(location)), 'w') as outfile:
-    json.dump(json_data, outfile)
-return False
+    if int(phone_number) == int(json_data['phone'][-4:]):
+        json_data = user_info(json_data)
+
+        with open(('./{}'.format(location)), 'w') as outfile:
+            json.dump(json_data, outfile)
+        return False
+
+    data.close()
+
+return True
 ```
 
-The *return False* statement is used to determine whether or not there to inform the user the phone number provided is not in the database.  Make sure to add a corresponding *True* statement outside of the *for* loop.
+The boolean statements will be used to determine whether or not to inform the user the phone number provided is not in the database. 
 
 ### Complete User Info
 
-Add a check for whether or not the user is logged in and display the correct 'Log In' or 'Log Out' button.
+In the *user_info* function, add another conditional statement for displaying 'Log In' or 'Log Out' button.
 ```
 if json_data['signedIN']:
     element = window.FindElement('logger')
@@ -313,19 +311,19 @@ elif button == 'Log Out' or values is None:
     return json_data
 ```
 
-Program complete!  Well done!
+That's it.  The program is now complete.  Well done!
 
 <br />
 
 ## Technology Used
 - Technology
     - [Python 2.7](https://docs.python.org/2/)
-- Package Downloaded
-    - [PySimpleGUI27](https://pypi.org/project/PySimpleGUI27/)
-- Default Python 2.7 Packages Used
-    - [JSON](https://docs.python.org/2/library/json.html)
-    - [OS](https://docs.python.org/2/library/os.html)
-    - [Time](https://docs.python.org/2/library/os.html)
+    - Package Downloaded
+        - [PySimpleGUI27](https://pypi.org/project/PySimpleGUI27/)
+    - Default Python 2.7 Packages Used
+        - [JSON](https://docs.python.org/2/library/json.html)
+        - [OS](https://docs.python.org/2/library/os.html)
+        - [Time](https://docs.python.org/2/library/os.html)
 
 <br />
 

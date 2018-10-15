@@ -6,8 +6,8 @@ import time
 def start_app():
     layout = [
         [sg.Text('Enter the last four of your phone number', size=(75, 1), justification='center', font=("Helvetica", 18))],
-        [sg.InputText(font=("Helvetica", 18), justification='center', size=(25,1), key='input_box')],
-        [sg.ReadButton('Submit'), sg.ReadButton('Clear')],
+        [sg.Text('', size=(35,1)), sg.InputText(font=("Helvetica", 18), justification='center', size=(30,1), key='input_box')],
+        [sg.Text('', size=(35,1)), sg.ReadButton('Submit'), sg.Text('', size=(18,1)), sg.ReadButton('Clear')],
         [sg.Exit(key='Exit')]
     ]
 

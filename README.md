@@ -34,9 +34,9 @@ A simple step-by-step guide to building a Log In/Out application using Python 2.
 ## Introduction
 ### Summary
 
-&nbsp;&nbsp;&nbsp;&nbsp; This guide is designed to be instructions on how to build a small log in and log out program.  The program will ask users for an input, and will check if the input is four digits long.  If it is, then it will compare the input value to people currently saved in the database.  If this particular check is true, then it will display on another screen information on the user and ask whether or not they wish to log in or out.  If any of the previous checks are not true then the users will receive the proper errors to inform them of what went wrong during the process.
+&nbsp;&nbsp;&nbsp;&nbsp; This guide is designed to be instructions on how to build a small log in and log out program.  The program will ask a user for an input, and will check if the input is four digits long.  If it is, then it will compare the input value to people currently saved in the database.  If this particular check is true, then it will display, on another window, the user's information and ask whether or not they wish to log in or out.  If any of the previous checks are not true then the user will receive the proper errors to inform them of what went wrong during the process.
 
-&nbsp;&nbsp;&nbsp;&nbsp; You are expected to have a basic understanding of [Terminal](https://www.codecademy.com/courses/learn-the-command-line/lessons/navigation/exercises/your-first-command) and [programming](https://www.freecodecamp.org/).  It would help if you knew Python, but it is not required.  Additionally, this guide will be assuming the program is written in a MacOSX environment, but the steps in Setup can be easily replaced with whichever OS you are most comfortable with.
+![alt text](./images/complete.png 'The completed Application')
 
 ### Setup
 
@@ -50,7 +50,7 @@ If it's not present, or the version is incorrect, please refer to the proper doc
 
 - [MacOSX](https://www.python.org/downloads/)
 
-Next, you will be using a Python package named PySimpleGUI27 for your project, so you will need to install it.
+Next, you will be using a Python package named PySimpleGUI27 for your project.
 ```
 $ pip install pysimplegui
 ```
@@ -78,7 +78,7 @@ def start_app():
 
 ### Create the Window
 
-Set the window variable to start PySimpleGUI27 and be sure to include all of your layout configurations.
+Set the *window* variable to contain PySimpleGUI27 and be sure to include all of your layout configurations.
 ```
 window = sg.Window('Log In/Out', auto_size_buttons=False, return_keyboard_events=True).Layout(layout)
 ```
@@ -138,7 +138,7 @@ def fetch_user(phone_number):
 
 ### Check for User
 
-Create a *for* loop to step through the database.
+Create an iterator to step through each JSON file in your database folder.
 ```
 for grab_file in database:
     location = '{}{}'.format('database/', grab_file)
@@ -146,7 +146,7 @@ for grab_file in database:
     json_data = json.load(data)
 ```
 
-Within the *for* loop, check if the current JSON file is going to contain the phone number you are looking for.  If it does then run a function called *user_info* (you are going to write this function this later).
+Within the iterator, check if the current JSON file is going to contain the phone number you are looking for.  If it does then run a function called *user_info* (you are going to write this function this later).
 ```
 if int(phone_number) == int(json_data['phone'][-4:]):
     user_info(json_data)
@@ -205,7 +205,7 @@ Now, time to test the program.
 
 ![alt text](./images/screen2.png 'A Wild Modal has Appeared')
 
-Awesome!  Looks like everything works!  Almost done. Onwards!
+Awesome!  Looks like everything works!
 
 <br />
 
@@ -228,7 +228,7 @@ elif button == 'Submit':
         element.Update('')
 ```
 
-The lines with the variable *element* in it are for clearing the input box of all written text.
+The lines written with the variable *element* are for clearing the input box of all inputted text.
 
 Within the *try* clause, add additional conditional statements to check if the number value is within the range you are checking for.
 ```
@@ -255,7 +255,19 @@ Looks great!
 
 ### Complete Start App
 
-While you are here, finish the *start_app* function by adding additional features such as *Clear* and *enter* key checks.
+While you are here, finish the *start_app* function with a few additional flares.
+
+First change your layout, so that everything is centered using empty text boxes.
+```
+layout = [
+    [sg.Text('Enter the last four of your phone number', size=(75, 1), justification='center', font=("Helvetica", 18))],
+    [sg.Text('', size=(35,1)), sg.InputText(font=("Helvetica", 18), justification='center', size=(30,1), key='input_box')],
+    [sg.Text('', size=(35,1)), sg.ReadButton('Submit'), sg.Text('', size=(18,1)), sg.ReadButton('Clear')],
+    [sg.Exit(key='Exit')]
+]
+```
+
+Then add features such as *Clear* and *enter* key checks.
 ```
 elif button == 'Clear':
     element = window.FindElement('input_box')
@@ -267,7 +279,7 @@ To reduce the chances of errors, you want to check for the *Clear* button first 
 
 ### Complete Fetch User
 
-Update this function to change the user's new log in/out data and time stamps.
+Update this function to change the user's JSON file with a new log in or log out data, and add time stamps for when the changes occur.
 ```
 for grab_file in database:
     location = '{}{}'.format('database/', grab_file)
@@ -286,7 +298,7 @@ for grab_file in database:
 return True
 ```
 
-The boolean statements will be used to determine whether or not to inform the user the phone number provided is not in the database. 
+The boolean statements will be used to determine whether or not to inform the user the phone number provided is in the database. 
 
 ### Complete User Info
 
